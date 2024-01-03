@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/5f7092d521.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Barlow+Semi+Condensed:wght@300&family=Manrope:wght@700&family=Noto+Sans+JP:wght@500&family=Questrial&family=Roboto:wght@900&family=Saira:wght@300&family=Vina+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Chess Board</title>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Slider 8-Puzzle <i class="fa-solid fa-hashtag"></i></h2>
+      <form id="myForm" class="submitform">
+        <div class="form">
+          The 8-puzzle is a sliding puzzle that is played on a 3-by-3 grid with
+          8 square tiles labeled 1 through 8, plus a blank square.
+          <br />
+          The goal is to rearrange the tiles so that they are in row-major
+          order, using as few moves as possible.
+          <!-- <input
+            class="input w3-border"
+            type="text"
+            placeholder="y2"
+            id="inputEndY"
+          /> -->
+        </div>
+        <div class="handle">
+          <input
+            id="create"
+            class="button-28"
+            type="button"
+            onclick="OnCreate()"
+            value="Create Map"
+          />
+          <input
+            id="find"
+            class="button-28"
+            type="button"
+            onclick="SubmitFunc()"
+            value="Find way"
+          />
+        </div>
+      </form>
+      <div id="containBoard">
+        <div class="contain">
+          <h3 id="b1"></h3>
+          <div id="board"></div>
+        </div>
+        <div class="contain">
+          <h3 id="b2"></h3>
+          <div id="board2"></div>
+        </div>
+        <div class="contain">
+          <h3 id="b3"></h3>
+          <div id="board3"></div>
+        </div>
+      </div>
+    </div>
+    <script src="puzzle.js"></script>
+  </body>
+</html>
