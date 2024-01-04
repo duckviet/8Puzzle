@@ -1,9 +1,9 @@
 // Kích thước của bảng
-let n = 3;
-let m = 3;
+const n = 3;
+const m = 3;
 
 // Khởi tạo một số trạng thái bắt đầu có thể giải được
-let startpos = [
+const startpos = [
   [
     [4, 6, 1],
     [7, 2, 8],
@@ -34,9 +34,29 @@ let startpos = [
     [4, 2, 6],
     [0, 8, 5],
   ],
+  [
+    [2, 8, 7],
+    [4, 5, 3],
+    [6, 1, 0],
+  ],
+  [
+    [2, 4, 3],
+    [8, 7, 0],
+    [1, 6, 5],
+  ],
+  [
+    [6, 8, 4],
+    [3, 7, 1],
+    [5, 2, 0],
+  ],
+  [
+    [3, 8, 4],
+    [5, 6, 1],
+    [2, 7, 0],
+  ],
 ];
 // Trạng thái cuối cùng
-let goal = [
+const goal = [
   [
     [1, 2, 3],
     [4, 5, 6],
@@ -68,7 +88,7 @@ function PushNSort(open, f, q, new_board) {
   });
 }
 
-// Hàm để tính khoảng cách Manhattan giữa bảng hiện tại và trạng thái cuối cùng
+// Hàm để tính kc Manhattan giữa bảng hiện tại và trạng thái cuối cùng
 function manhattan(board, final) {
   let d = 0;
   for (let i = 0; i < n; ++i) {
@@ -154,15 +174,18 @@ function slidingPuzzle(start, final, path) {
     let i = 0;
     let curr = JSON.stringify(final);
 
-    // Vòng lặp truy ngược lại đường đi
+    // Vòng lặp truy ngược lại đường đi bằng parent
     while (i < numberStep) {
       path.push(curr);
       curr = parent.get(curr);
       i++;
     }
     path.reverse();
+
     console.log("Path length: " + numberStep);
-    console.log(path);
+    console.log("start: ", JSON.stringify(start));
+    console.log("finish: ", JSON.stringify(final));
+    console.log("step by step: ", path);
   } else {
     alert("Dont have");
   }
@@ -171,9 +194,8 @@ function slidingPuzzle(start, final, path) {
 let path = [];
 let start = [];
 let final = [];
-/*Hàm tạo ra hai bảng cho trạng thái bắt đầu start và trạng thái goal
- Trạng thái bắt đầu được tạo ngẫu nhiên từ mảng startpos cho trước
- Sau đó gọi hàm `slidingPuzzle` để tìm cách giải*/
+/*Hàm bao gồm tạo giao diện hai bảng cho trạng thái bắt đầu start và trạng thái goal.
+ Trạng thái bắt đầu được tạo ngẫu nhiên từ mảng startpos cho trước*/
 function OnCreate() {
   path = [];
 
@@ -218,7 +240,7 @@ function OnCreate() {
   boardContainer2.innerHTML = html2.join("");
 }
 
-// Hàm được gọi khi có sự kiện nhấn "Solve"
+// Hàm được gọi khi có sự kiện nhấn "Solve". Gọi hàm `slidingPuzzle` để tìm cách giải. Sau đó tạo giao diện
 function SubmitFunc() {
   let index = 0;
   slidingPuzzle(start, final, path); //Giải
