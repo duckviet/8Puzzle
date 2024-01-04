@@ -5,6 +5,26 @@ const m = 3;
 // Khởi tạo một số trạng thái bắt đầu có thể giải được
 const startpos = [
   [
+    [1, 2, 3],
+    [4, 5, 6],
+    [8, 7, 0],
+  ],
+  [
+    [1, 2, 3],
+    [0, 4, 6],
+    [8, 5, 7],
+  ],
+  [
+    [2, 7, 3],
+    [0, 4, 6],
+    [8, 5, 1],
+  ],
+  [
+    [3, 7, 2],
+    [6, 4, 0],
+    [8, 5, 1],
+  ],
+  [
     [4, 6, 1],
     [7, 2, 8],
     [3, 5, 0],
@@ -48,11 +68,6 @@ const startpos = [
     [6, 8, 4],
     [3, 7, 1],
     [5, 2, 0],
-  ],
-  [
-    [3, 8, 4],
-    [5, 6, 1],
-    [2, 7, 0],
   ],
 ];
 // Trạng thái cuối cùng
@@ -116,6 +131,24 @@ function PositionZero(board) {
   }
   return p;
 }
+//Phát hiện bảng không thể giải quyết được dựa vào "when n is odd, an n-by-n board is solvable if and only if its number of inversions is even".
+function inversions(board) {
+  let v = [];
+  let sum = 0;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] !== 0) {
+        v.push(board[i][j]);
+      }
+    }
+  }
+  for (let i = 0; i < v.length - 1; i++) {
+    for (let j = i + 1; j < v.length; j++) {
+      if (v[i] > v[j]) sum++;
+    }
+  }
+  return sum;
+}
 
 // Hàm giải thuật tìm cách giải puzzle dựa trên thuật toán a*
 function slidingPuzzle(start, final, path) {
@@ -136,6 +169,11 @@ function slidingPuzzle(start, final, path) {
     //phải là trạng thái cuối cùng không. Nếu đúng, hàm sẽ trả về số bước di chuyển cần thiết để đạt được trạng thái cuối
     let T = open.pop();
     let t = T[1];
+    // Nếu nhận thấy bảng k thể giải được thì break
+    if (inversions(t) % 2 === 1) {
+      flag = false;
+      break;
+    }
     if (JSON.stringify(t) === JSON.stringify(final)) {
       numberStep = T[0][1];
       flag = true;
@@ -187,7 +225,7 @@ function slidingPuzzle(start, final, path) {
     console.log("finish: ", JSON.stringify(final));
     console.log("step by step: ", path);
   } else {
-    alert("Dont have");
+    alert("Dont have solution");
   }
 }
 
